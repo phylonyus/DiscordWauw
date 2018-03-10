@@ -24,6 +24,17 @@ client.on("message", (message) => {
 		})
 		.catch(err => console.log(err));
   } else
+  if (message.content.startsWith(config.prefix + "yeah")) {
+  	var channel = client.channels.find("name", "praat_kanaaltje");
+  	channel.join()
+		.then(connection => {
+			console.log('Yeah!');
+			const dispatcher = connection.playFile('./audio/letsgoja.mp3', { volume: 1.0 });
+			dispatcher.on("start", start => { connection.player.streamingData.pausedTime = 0;})
+			dispatcher.on("end", end => {channel.leave()});
+		})
+		.catch(err => console.log(err));
+  } else
     if (message.content.startsWith(config.prefix + "cat")) {
   	var channel = client.channels.find("name", "praat_kanaaltje");
   	channel.join()
@@ -62,9 +73,6 @@ client.on("message", (message) => {
       	const emojiDylan = client.emojis.find("name", "Dylan");
 
       message.channel.send(emojiDylan + "\n\n !!wauw - Wauw \n !!cat - Cat Wauw \n !!random - Random Wauw \n !!idubbz - ... \n !!help - deze pagina \n\n Leer je commands kankerlijer.");
-  } else {
-  	const emojiDylan = client.emojis.find("name", "Dylan");
-  	message.channel.send(emojiDylan + "\n\n !!wauw - Wauw \n !!cat - Cat Wauw \n !!random - Random Wauw \n !!idubbz - ... \n !!help - deze pagina \n\n Leer je commands kankerlijer.");
   }
 });
 
