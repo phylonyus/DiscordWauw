@@ -46,7 +46,7 @@ client.on("message", (message) => {
 		})
 		.catch(err => console.log(err));
   } else
-    if (message.content.startsWith(config.prefix + "random")) {
+    if (message.content.startsWith(config.prefix + "random" || config.prefix + "wow" )) {
   	var channel = client.channels.find("name", "praat_kanaaltje");
   	var random = Math.floor((Math.random() * 30) + 1);
   	channel.join()
